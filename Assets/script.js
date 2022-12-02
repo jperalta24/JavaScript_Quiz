@@ -23,16 +23,15 @@
 
 //DOM manipulation 
 var timeLeft = document.getElementById("seconds");
-var startbuttn = document.getElementById("bttn1");
+var startButton = document.getElementById("startButton");
 var questionIndex = 0;
-var answersIndex = 0;
-var answerButtons = document.getElementsByClassName("answerButton");
+var choicesIndex = 0;
+var answerIndex = 0;
+var choiceButtons = document.getElementsByClassName("choiceButton");
 var container1 = document.getElementById("container1");
 var questionEl = document.getElementById("questionEl");
 
 window.document;
-console.log(document);
-console.log(timeLeft);
 
 //Define a set of Questions
 var questions = [
@@ -42,13 +41,13 @@ var questions = [
         answer: 'd. <script>'
     },
     {
-        question: 'Arrays im Javascript can be used to store ______',
+        question: 'Arrays in Javascript can be used to store ______',
         choices: ['a. numbers and strings', 'b. booleans', 'c. other arrays', 'd. all of the above'],
         answer: 'd. all of the above'
     },
     {
         question: 'To see if two variables are equal in an if/else statement you would use _____',
-        choices: ['a. =', 'b. ==', 'c. equals' , 'd. !='],
+        choices: ['a. =', 'b. ==', 'c. equals', 'd. !='],
         answer: 'b. =='
     },
     {
@@ -67,7 +66,7 @@ var questions = [
 totalTime = 90;
 //function to start time interval 
 function startTime() {
-    startbuttn.style.display = "none"
+    startButton.style.display = "none"
     var startInterval = setInterval(function () {
         totalTime--;
         timeLeft.textContent = totalTime;
@@ -83,32 +82,52 @@ function startTime() {
 
 
 function newQuiz() {
-    questionIndex = 0;
-    totalTime.value = timeLeft;
     startTime();
+    totalTime.value = timeLeft;
+    questionIndex = 0;
     nextQuestion();
     container1.style.display = "block";
 
 
-    console.log(timeLeft);
+    
 
 }
+
 
 function nextQuestion() {
     questionEl.textContent = questions[questionIndex].question
-    console.log(answerButtons);
-    // questionIndex++;
-    
-   
-    for (i = 0; i < answerButtons.length; i++) {
-        answerButtons[i].textContent = questions[questionIndex].choices[answersIndex];
-        answersIndex++;
+
+    for (i = 0; i < choiceButtons.length; i++) {
+        choiceButtons[i].textContent = questions[questionIndex].choices[i];
     };
+
+
+
+
+
+    questionIndex++;
+}
+
+function isCorrect() {
+  if(choiceButtons === true){
+    console.log(hello)
+  }
+    
+  
+}
+console.log(choiceButtons);
+
+function checkAnswers() {
+    isCorrect()
+    nextQuestion()
+
+
 }
 
 
-startbuttn.addEventListener("click", newQuiz);
+startButton.addEventListener("click", newQuiz);
 
-for (i = 0; i < answerButtons.length; i++) {
-    answerButtons[i].addEventListener("click", nextQuestion);
+
+for (i = 0; i < choiceButtons.length; i++) {
+    choiceButtons[i].addEventListener("click", checkAnswers);
 }
