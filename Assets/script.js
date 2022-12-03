@@ -109,11 +109,11 @@ function nextQuestion() {
 
 function isCorrect() {
     for (i = 0; i < choiceButtons.length; i++) {
-        if (choiceButtons[i] != questions[i].answer[i]){
-            timeLeft = timeLeft -10;
+        if (choiceButtons.textContent != questions[i].answer[i]){
+            totalTime = totalTime -10;
         }
     }
-    
+    console.log(choiceButtons.textContent)
 };
 
 
