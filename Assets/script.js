@@ -30,6 +30,9 @@ var answerIndex = 0;
 var choiceButtons = document.getElementsByClassName("choiceButton");
 var container1 = document.getElementById("container1");
 var questionEl = document.getElementById("questionEl");
+var score = 0;
+
+
 
 window.document;
 
@@ -93,34 +96,99 @@ function newQuiz() {
 
 }
 
-
 function nextQuestion() {
-    questionEl.textContent = questions[questionIndex].question
-
+    questionEl.textContent = questions[questionIndex].question;
     for (i = 0; i < choiceButtons.length; i++) {
         choiceButtons[i].textContent = questions[questionIndex].choices[i];
-    };
+    }
+}
+function rightAnswer(){
+    score += 1;
+    document.getElementById("score").innerHTML = score;
+    
+    
+}
+function isCorrect(event) {
+    if (event.target.textContent !== questions[questionIndex].answer) {
+        totalTime = totalTime - 10;
+        questionIndex++;
+        nextQuestion();
+    } 
+    else {
+        rightAnswer()
+        questionIndex++;
+        nextQuestion();
+    }
+}
+console.log(choiceButtons);
 
-
-    questionIndex++;
+function checkAnswers(event) {
+    isCorrect(event);
+    
 }
 
 
+// function nextQuestion() {
+//     questionEl.textContent = questions[questionIndex].question
 
-function isCorrect() {
-    for (i = 0; i < choiceButtons.length; i++) {
-        if (choiceButtons.textContent != questions[i].answer[i]){
-            totalTime = totalTime -10;
-        }
-    }
-    console.log(choiceButtons.textContent)
-};
+//     for (i = 0; i < choiceButtons.length; i++) {
+//         choiceButtons[i].textContent = questions[questionIndex].choices[i];
+//     };
 
 
-function checkAnswers(){
-       isCorrect()
-       nextQuestion()
-    }
+//     questionIndex++;
+// }
+
+// function isCorrect(event) {
+//     if (event.target.textContent !== questions[questionIndex].answer) {
+//         totalTime = totalTime - 10;
+//     }
+//     nextQuestion();
+// }
+
+// function checkAnswers(event) {
+//     isCorrect(event);
+// }
+
+// function isCorrect(event) {
+//     if (event.target.textContent !== questions[questionIndex].answer) {
+//         totalTime = totalTime - 10;
+//     }
+// }
+
+// function checkAnswers(event) {
+//     isCorrect(event);
+//     nextQuestion();
+// }
+
+// function isCorrect() {
+//     if (choiceButtons.textContent 1=)
+// }
+
+// function isCorrect() {
+//     for (i = 0; i < choiceButtons.length; i++) {
+//         if (choiceButtons[i].textContent != questions[questionIndex].answer[i]) {
+//             totalTime = totalTime - 10;
+//         }
+//     }
+//     console.log(choiceButtons.textContent);
+// }
+
+
+// function isCorrect() {
+//     for (i = 0; i < choiceButtons.length; i++) {
+//         if (choiceButtons.textContent != questions[i].answer[i]){
+//             totalTime = totalTime -10;
+//         }
+//     }
+//     console.log(choiceButtons.textContent)
+// };
+
+
+// function checkAnswers(){
+//        isCorrect()
+//        nextQuestion()
+//     }
 
 
 startButton.addEventListener("click", newQuiz());
@@ -128,6 +196,6 @@ startButton.addEventListener("click", newQuiz());
 // created a for loop because event listeners wont work on arrays
 for (i = 0; i < choiceButtons.length; i++) {
     choiceButtons[i].addEventListener("click", checkAnswers)
-    
+
 }
 
