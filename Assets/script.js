@@ -109,7 +109,7 @@ function nextQuestion() {
 
 function isCorrect() {
     if(choiceButtons[i] === true){
-        console.log("hello");
+        timeLeft -10;
     }
 
 };
