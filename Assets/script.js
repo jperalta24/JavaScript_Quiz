@@ -108,15 +108,16 @@ function nextQuestion() {
 
 
 function isCorrect() {
-    if(choiceButtons[i] === true){
-        timeLeft -10;
+    for (i = 0; i < choiceButtons.length; i++) {
+        if (choiceButtons[i] == questions[i].answer[i]){
+            console.log(choiceButtons)
+        }
     }
-
+    
 };
 
 
-function checkAnswers(e){
-    console.log(e.target)
+function checkAnswers(){
        isCorrect()
        nextQuestion()
     }
@@ -126,9 +127,7 @@ startButton.addEventListener("click", newQuiz());
 
 // created a for loop because event listeners wont work on arrays
 for (i = 0; i < choiceButtons.length; i++) {
-    choiceButtons[i].addEventListener("click", checkAnswers(e))
-    {
-        console.log(e);
-    }
+    choiceButtons[i].addEventListener("click", checkAnswers)
+    
 }
 
