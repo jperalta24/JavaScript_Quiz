@@ -89,7 +89,7 @@ function newQuiz() {
     container1.style.display = "block";
 
 
-    
+
 
 }
 
@@ -102,32 +102,33 @@ function nextQuestion() {
     };
 
 
-
-
-
     questionIndex++;
 }
 
+
+
 function isCorrect() {
-  if(choiceButtons === true){
-    console.log(hello)
-  }
-    
-  
-}
-console.log(choiceButtons);
+    if(choiceButtons[i] === true){
+        console.log("hello");
+    }
 
-function checkAnswers() {
-    isCorrect()
-    nextQuestion()
+};
 
 
-}
+function checkAnswers(e){
+    console.log(e.target)
+       isCorrect()
+       nextQuestion()
+    }
 
 
-startButton.addEventListener("click", newQuiz);
+startButton.addEventListener("click", newQuiz());
 
-
+// created a for loop because event listeners wont work on arrays
 for (i = 0; i < choiceButtons.length; i++) {
-    choiceButtons[i].addEventListener("click", checkAnswers);
+    choiceButtons[i].addEventListener("click", checkAnswers(e))
+    {
+        console.log(e);
+    }
 }
+
