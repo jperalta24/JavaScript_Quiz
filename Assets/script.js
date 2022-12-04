@@ -24,17 +24,16 @@
 //DOM manipulation 
 var timeLeft = document.getElementById("seconds");
 var startButton = document.getElementById("startButton");
-var questionIndex = 0;
-var choicesIndex = 0;
-var answerIndex = 0;
 var choiceButtons = document.getElementsByClassName("choiceButton");
 var container1 = document.getElementById("container1");
 var questionEl = document.getElementById("questionEl");
+document.getElementById("credentials").style.display = "none";
 var score = 0;
+var questionIndex = 0;
 
 
 
-window.document;
+console.log(document.body);
 
 //Define a set of Questions
 var questions = [
@@ -76,6 +75,7 @@ function startTime() {
         //stops quiz when time reaches 0
         if (totalTime === 0) {
             clearInterval(startInterval);
+            endQuiz();
         }
         ;
 
@@ -85,15 +85,11 @@ function startTime() {
 
 
 function newQuiz() {
-    startTime();
     totalTime.value = timeLeft;
     questionIndex = 0;
+    startTime();
     nextQuestion();
     container1.style.display = "block";
-
-
-
-
 }
 
 function nextQuestion() {
@@ -101,97 +97,45 @@ function nextQuestion() {
     for (i = 0; i < choiceButtons.length; i++) {
         choiceButtons[i].textContent = questions[questionIndex].choices[i];
     }
+    if (choiceButtons = questionIndex[3]){
+        endQuiz();
+     }
+    
 }
-function rightAnswer(){
+
+function rightAnswer() {
     score += 1;
     document.getElementById("score").innerHTML = score;
-    
-    
 }
+
+function endQuiz() {
+    container1.style.display = "none";
+    document.getElementById("credentials").style.display = "block";
+
+}
+
 function isCorrect(event) {
     if (event.target.textContent !== questions[questionIndex].answer) {
         totalTime = totalTime - 10;
         questionIndex++;
         nextQuestion();
-    } 
+    }
     else {
         rightAnswer()
         questionIndex++;
         nextQuestion();
     }
+     
 }
-console.log(choiceButtons);
+
 
 function checkAnswers(event) {
     isCorrect(event);
-    
+
 }
 
 
-// function nextQuestion() {
-//     questionEl.textContent = questions[questionIndex].question
-
-//     for (i = 0; i < choiceButtons.length; i++) {
-//         choiceButtons[i].textContent = questions[questionIndex].choices[i];
-//     };
-
-
-//     questionIndex++;
-// }
-
-// function isCorrect(event) {
-//     if (event.target.textContent !== questions[questionIndex].answer) {
-//         totalTime = totalTime - 10;
-//     }
-//     nextQuestion();
-// }
-
-// function checkAnswers(event) {
-//     isCorrect(event);
-// }
-
-// function isCorrect(event) {
-//     if (event.target.textContent !== questions[questionIndex].answer) {
-//         totalTime = totalTime - 10;
-//     }
-// }
-
-// function checkAnswers(event) {
-//     isCorrect(event);
-//     nextQuestion();
-// }
-
-// function isCorrect() {
-//     if (choiceButtons.textContent 1=)
-// }
-
-// function isCorrect() {
-//     for (i = 0; i < choiceButtons.length; i++) {
-//         if (choiceButtons[i].textContent != questions[questionIndex].answer[i]) {
-//             totalTime = totalTime - 10;
-//         }
-//     }
-//     console.log(choiceButtons.textContent);
-// }
-
-
-// function isCorrect() {
-//     for (i = 0; i < choiceButtons.length; i++) {
-//         if (choiceButtons.textContent != questions[i].answer[i]){
-//             totalTime = totalTime -10;
-//         }
-//     }
-//     console.log(choiceButtons.textContent)
-// };
-
-
-// function checkAnswers(){
-//        isCorrect()
-//        nextQuestion()
-//     }
-
-
-startButton.addEventListener("click", newQuiz());
+startButton.addEventListener("click", newQuiz);
 
 // created a for loop because event listeners wont work on arrays
 for (i = 0; i < choiceButtons.length; i++) {
