@@ -28,9 +28,9 @@ var choiceButtons = document.getElementsByClassName("choiceButton");
 var container1 = document.getElementById("container1");
 var questionEl = document.getElementById("questionEl");
 document.getElementById("credentials").style.display = "none";
+document.getElementById("submit").style.display = "none";
 var score = 0;
 var questionIndex = 0;
-
 
 
 console.log(document.body);
@@ -61,7 +61,14 @@ var questions = [
         question: 'Commonly used data types DO NOT include:',
         choices: ['a. alerts', 'b. numbers', 'c. booleans', 'd. strings'],
         answer: 'a. alerts'
+    },
+    // added empty properties to allow my endQuiz function to work properly
+    {
+        question:"",
+        choices: "",
+        answer: ""
     }
+
 
 ];
 //sets total time for quiz
@@ -82,11 +89,11 @@ function startTime() {
     }, 1000);
 }
 
-
+console.log(questions.length)
 
 function newQuiz() {
     totalTime.value = timeLeft;
-    questionIndex = 0;
+    // questionIndex = 0;
     startTime();
     nextQuestion();
     container1.style.display = "block";
@@ -97,9 +104,11 @@ function nextQuestion() {
     for (i = 0; i < choiceButtons.length; i++) {
         choiceButtons[i].textContent = questions[questionIndex].choices[i];
     }
-    if (questions.length === questionIndex){
+    
+    if (questions.length -1  === questionIndex ){
         endQuiz();
      }
+     console.log(questionIndex)
     
 }
 
@@ -111,6 +120,8 @@ function rightAnswer() {
 function endQuiz() {
     container1.style.display = "none";
     document.getElementById("credentials").style.display = "block";
+    document.getElementById("submit").style.display = "block";
+    document.getElementById("time").style.display = "none";
 
 }
 
@@ -125,13 +136,13 @@ function isCorrect(event) {
         questionIndex++;
         nextQuestion();
     }
-     
+
 }
 
 
 function checkAnswers(event) {
     isCorrect(event);
-
+    
 }
 
 
