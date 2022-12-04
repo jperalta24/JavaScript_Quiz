@@ -97,7 +97,7 @@ function nextQuestion() {
     for (i = 0; i < choiceButtons.length; i++) {
         choiceButtons[i].textContent = questions[questionIndex].choices[i];
     }
-    if (choiceButtons = questionIndex[3]){
+    if (questions.length === questionIndex){
         endQuiz();
      }
     
