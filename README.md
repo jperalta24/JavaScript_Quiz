@@ -16,7 +16,7 @@ To use this application, click on the start button to start quiz. After completi
 
 ### Contact
 - Jonthan Peralta - example.com
-- Project Link :
+- Project Link : https://jperalta24.github.io/JavaScript_Quiz/
 
 ### Aknowledgements
 - My tutor, Ben Martin
