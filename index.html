@@ -11,11 +11,14 @@
 
 <body>
   <h1>JavaScript Coding Quiz Challenge</h1>
-
-  <div id="time">Time:<span id="seconds">0</span>
+  <div class="timeScore" id="time">Time:<span id="seconds">0</span>
   </div>
-  <div>Score:<span id="score">0</span></div>
-  <button id="startButton">Start Quiz</button>
+  <div class="timeScore" id="scoreText">Score:<span id="score">0</span></div>
+  <main id="quizInfo">Try to answer the following JavaScript related questions within the time limit.<br>
+    Keep in mind that incorrect answers will penalize your time by 15 seconds.<br>
+    Enter your initials at the end to save your score. Good luck!<br>
+    <button id="startButton">Start Quiz</button>
+  </main>
   <div id="container1">
     <p id="questionEl"></p>
     <ul>
@@ -25,10 +28,11 @@
       <li><button id="button4" class="choiceButton"></button></li>
     </ul>
   </div>
-  <form id="credentials">
-    <label for="name">Enter your initials:</label><br>
-    <input type="text" id="name"></form><br>
-    <button id="submit">Submit</button>
+  <form id="credentials" onsubmit="event.preventDefault()">
+    <label for="name" id="nameInput">Enter your initials:</label><br>
+    <input type="text" id="name">
+  </form><br>
+  <button id="submit">Submit</button>
   </form>
   <script src="Assets/script.js"></script>
 </body>

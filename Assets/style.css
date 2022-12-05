@@ -1,7 +1,55 @@
+* {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+body{
+  box-sizing: border-box;
+  padding: 0px 10%;
+  background-color: whitesmoke;
+}
+
+h1 {
+  text-align: center;
+  
+}
+
+#quizInfo {
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 20px;
+}
+
+#startButton{
+  font-size: 20px;
+  margin-top: 20px;
+  border-radius: 8px;
+  background-color: darkseagreen;
+}
+
+
 #container1 {
-  display: none;  
+  display: none;
+  text-align: center;  
 }
 
 ul {
  list-style: none; 
 }
+
+.timeScore {
+  font-size: 25px;
+}
+
+
+.choiceButton {
+width: 30%;
+text-align: justify;
+border-radius: 8px;
+background-color: darkseagreen;
+}
+
+#questionEl {
+  font-size: 20px;
+}
+
+

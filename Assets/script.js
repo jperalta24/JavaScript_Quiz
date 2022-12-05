@@ -1,20 +1,3 @@
-// User Story
-// AS A coding boot camp student
-// I WANT to take a timed quiz on JavaScript fundamentals that stores high scores
-// SO THAT I can gauge my progress compared to my peers
-// Acceptance Criteria
-// GIVEN I am taking a code quiz
-// WHEN I click the start button
-// THEN a timer starts and I am presented with a question
-// WHEN I answer a question
-// THEN I am presented with another question
-// WHEN I answer a question incorrectly
-// THEN time is subtracted from the clock
-// WHEN all questions are answered or the timer reaches 0
-// THEN the game is over
-// WHEN the game is over
-// THEN I can save my initials and my score
-
 // 1. add a timer when start quiz button is clicked and present user with first question
 // 2. after user answers question, present the next question.
 // 3. if the user answers question incorrectly, deduct time from timer.
@@ -27,15 +10,17 @@ var startButton = document.getElementById("startButton");
 var choiceButtons = document.getElementsByClassName("choiceButton");
 var container1 = document.getElementById("container1");
 var questionEl = document.getElementById("questionEl");
+var userInfo = document.getElementById("name");
+var subButton = document.getElementById("submit");
+var finalScore = document.getElementById("scoreText");
 document.getElementById("credentials").style.display = "none";
 document.getElementById("submit").style.display = "none";
+
 var score = 0;
 var questionIndex = 0;
 
 
-console.log(document.body);
-
-//Define a set of Questions
+//Define a set of Questions with choices and answer
 var questions = [
     {
         question: 'Inside which HTML element do we put the JavaScript?',
@@ -64,7 +49,7 @@ var questions = [
     },
     // added empty properties to allow my endQuiz function to work properly
     {
-        question:"",
+        question: "",
         choices: "",
         answer: ""
     }
@@ -80,7 +65,7 @@ function startTime() {
         totalTime--;
         timeLeft.textContent = totalTime;
         //stops quiz when time reaches 0
-        if (totalTime === 0) {
+        if (totalTime === 0 || questions.length - 1 === questionIndex) {
             clearInterval(startInterval);
             endQuiz();
         }
@@ -89,42 +74,31 @@ function startTime() {
     }, 1000);
 }
 
-console.log(questions.length)
-
+// starts quiz after start button event is clicked
 function newQuiz() {
     totalTime.value = timeLeft;
-    // questionIndex = 0;
     startTime();
     nextQuestion();
     container1.style.display = "block";
+    document.getElementById("quizInfo").style.display = "none";
+    
 }
 
+// inputs multiple choice answers from the questions array into buttons
 function nextQuestion() {
     questionEl.textContent = questions[questionIndex].question;
     for (i = 0; i < choiceButtons.length; i++) {
         choiceButtons[i].textContent = questions[questionIndex].choices[i];
     }
-    
-    if (questions.length -1  === questionIndex ){
+
+    if (questions.length - 1 === questionIndex) {
         endQuiz();
-     }
-     console.log(questionIndex)
-    
-}
-
-function rightAnswer() {
-    score += 1;
-    document.getElementById("score").innerHTML = score;
-}
-
-function endQuiz() {
-    container1.style.display = "none";
-    document.getElementById("credentials").style.display = "block";
-    document.getElementById("submit").style.display = "block";
-    document.getElementById("time").style.display = "none";
+    }
+    console.log(questionIndex)
 
 }
 
+// deducts time if user selects the wrong answer
 function isCorrect(event) {
     if (event.target.textContent !== questions[questionIndex].answer) {
         totalTime = totalTime - 10;
@@ -142,10 +116,50 @@ function isCorrect(event) {
 
 function checkAnswers(event) {
     isCorrect(event);
+
+}
+
+// function that runs if user selects the button with the correct answer
+function rightAnswer() {
+    score += 1;
+    document.getElementById("score").innerHTML = score;
+}
+
+function endQuiz() {
+    container1.style.display = "none";
+    document.getElementById("credentials").style.display = "block";
+    document.getElementById("submit").style.display = "block";
+    document.getElementById("time").style.display = "none";
+
+}
+
+function showScore() {
+    document.getElementById("nameInput").style.display = "none";
+    userInfo.setAttribute("style", " color:green; font-size: 50px; border-style: hidden; ");
+    subButton.style.display = "none"
+    document.getElementById("score").style.fontSize = "50px";
+    document.getElementById("scoreText").style.fontSize = "50px";
     
 }
 
+// event listner to save user initials and high score. See application tab in dev tools
+subButton.addEventListener("click", function () {
+    // var userInfo = document.getElementById("name");
 
+    var initials = userInfo.value;
+
+    console.log(initials);
+
+    let userIn = {
+        userName: initials,
+        highScore: score
+    }
+    localStorage.setItem("userIn", JSON.stringify(userIn));
+
+    showScore()
+});
+
+// starts the quiz
 startButton.addEventListener("click", newQuiz);
 
 // created a for loop because event listeners wont work on arrays
