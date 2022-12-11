@@ -167,4 +167,3 @@ for (i = 0; i < choiceButtons.length; i++) {
     choiceButtons[i].addEventListener("click", checkAnswers)
 
 }
-
